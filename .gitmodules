@@ -19,6 +19,6 @@
 [submodule "bundle/taglist"]
 	path = bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
-[submodule "bundle/precisejump"]
-	path = bundle/precisejump
-	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/gundo"]
+	path = bundle/gundo
+	url = https://github.com/sjl/gundo.vim.git

@@ -131,12 +131,6 @@ if has("gui_running")
     set cursorline
     "set cursorcolumn
 
-    " Cursor customization: ignore whatver the colorscheme says
-    "highlight Cursor guifg=#ffffff guibg=#ff0000
-    "highlight iCursor guifg=#ffffff guibg=#ff0000
-    "set guicursor=n-v-c:block-Cursor
-    "set guicursor+=i:ver30-iCursor-blinkwait300-blinkon200-blinkoff150
-
     " Set default font
     "set guifont=Droid\ Sans\ Mono\ Slashed:h12
     set guifont=Menlo-Regular:h12
@@ -371,15 +365,18 @@ let g:tlTokenList = ['TODO', 'HACK', 'FIXME']
 " Toggle hlsearch
 map <F8> :set hls!<bar>set hls?<cr>
 
-" Paste toggle
-"set pastetoggle=<F8>
+" Gundo
+let g:gundo_preview_height = 20
+" Show the preview window below the main window
+let g:gundo_preview_bottom = 1
+nnoremap <silent><leader>u :GundoToggle<cr>
 
 " BufTabs
 let g:buftabs_only_basename=1
 let g:buftabs_active_highlight_group="Visual"
-let g:buftabs_separator = "-"
-let g:buftabs_marker_start = "("
-let g:buftabs_marker_end = ") "
+let g:buftabs_separator = " "
+let g:buftabs_marker_start = "["
+let g:buftabs_marker_end = "] "
 
 " MRU - Most Recently Used
 let MRU_File = '/Users/chris/.vim/bundle/mru/mru_files'
@@ -392,6 +389,17 @@ nnoremap <silent> <leader>p :set ft=php<cr>
 
 " Syntastic
 let g:syntastic_enable_signs = 1
+
+" Toggle linenumber mode
+function! g:ToggleNuMode()
+    if(&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
+
+nnoremap <silent> <leader>nm :call g:ToggleNuMode()<cr>
 "}}}
 
 " ===================================================
@@ -401,6 +409,7 @@ let g:syntastic_enable_signs = 1
 iab _NAME Chris Ruzin
 iab _URL http://www.chrisruzin.net
 iab _EMAIL thatguy@chrisruzin.net
+iab _SOLEMAIL chris@solspace.com
 iab _DATE <C-R>=strftime("%A, %B %e %Y %I:%M:%S %p %Z")<CR>
 "}}}
 
@@ -409,7 +418,7 @@ iab _DATE <C-R>=strftime("%A, %B %e %Y %I:%M:%S %p %Z")<CR>
 " ===================================================
 
 " Remove any trailing whitespace that is in the file
-au! BufRead,BufWrite * %s/\s\+$//ge
+"au! BufRead,BufWrite * %s/\s\+$//ge
 
 " When .vimrc is edited, reload it
 au! bufwritepost .vimrc source ~/.vimrc
