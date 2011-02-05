@@ -64,6 +64,9 @@ set nostartofline
 
 " Let my cursor go where I tell it to
 set virtualedit=all
+
+" Play nice with the system pasteboard
+set clipboard=unnamed
 "}}}
 
 " ===================================================
@@ -99,9 +102,15 @@ set number
 set numberwidth=6
 
 " GUI-related stuff
+"if has("gui_macvim")
 if has("gui_running")
     " Color scheme
-    colorscheme sunburst
+    " 0 = light, no color
+    " 1 = light, color
+    " 2 = dark, no color
+    " 3 = dark, color (GUI only)
+    let g:zenesque_colors=3
+    colorscheme zenesque
 
     " Window transparency
     set transparency=2
@@ -120,7 +129,7 @@ if has("gui_running")
 
     " Highlight current line and column
     set cursorline
-    set cursorcolumn
+    "set cursorcolumn
 
     " Cursor customization: ignore whatver the colorscheme says
     "highlight Cursor guifg=#ffffff guibg=#ff0000
@@ -142,7 +151,8 @@ if has("gui_running")
     set undolevels=1000 " Max number of changes that can be undone
     set undoreload=5000 " Max number of lines to save on buffer reload
 else
-    colorscheme xoria256
+    let g:zenesque_colors=2
+    colorscheme zenesque
 endif
 "}}}
 
