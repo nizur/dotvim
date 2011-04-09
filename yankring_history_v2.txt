@@ -1,0 +1,100 @@
+            let g:yankring_history_dir = '$VIM',V
+            let g:yankring_window_width = 30,V
+            let g:yankring_window_use_horiz = 0  " Use vertical split,V
+let g:yankring_window_use_separate = 0 " Use the old layout,V
+            let g:yankring_window_use_separate = 0,V
+" PHP-related settings,V
+" Window width,V
+" Sort by tag name,V
+" Only show tags for the file I'm looking at,V
+" Show the tags menu,V
+" Always process the file,V
+" Show the first 20 chars of the tag name,V
+" Make submenus if there are more than 10 tags,V
+" Focus the Taglist window when opened,V
+" Disable column folding,V
+" Ctags command location,V
+" Compact window,V
+" Close the Ctags window when I select a tag,V
+deletes,v
+let g:yankring_min_element_length = 2,V
+            let g:yankring_min_element_length = 2,V
+    yankring_max_history ,V
+ ,v
+  let g:bufExplorerShowDirectories=0   " Don't show directories.,V
+"set statusline+=%=FUNC:\ %{cfi#get_func_name()},V
+" CFI: don't show param in statuslinelet g:cfi_php_show_params = 0,V
+" Display prototype, not namelet Tlist_Display_Prototype = 1,V
+Tlist_Show_Menu,v
+" Only show tags for the file I'm looking atlet Tlist_Show_One_File = 1" Sort by tag namelet Tlist_Sort_Type = "name",V
+" Only show tags for the file I'm looking atlet Tlist_Show_One_File = 1,V
+" Always process the filelet Tlist_Process_File_Always = 1,V
+" Make submenus if there are more than 10 tagslet Tlist_Max_Submenu_Items = 10" Show the first 20 chars of the tag namelet Tlist_Max_Tag_Length = 25,V
+" Make submenus if there are more than 10 tagslet Tlist_Max_Submenu_Items = 10,V
+" Disable column foldinglet Tlist_Enable_Fold_Column = 0" Focus the Taglist window when openedlet Tlist_GainFocus_On_ToggleOpen = 1,V
+" Disable column foldinglet Tlist_Enable_Fold_Column = 0,V
+" Compact windowlet Tlist_Compact_Format = 1,V
+" Close the Ctags window when I select a taglet Tlist_Close_On_Select = 1,V
+frame,v
+Tlist_GainFocus_On_ToggleOpen,v
+Tlist_Display_Prototype,v
+Tlist_Compact_Format,v
+(,v
+%,v
+=,v
+f,v
+<,v
+",v
+],v
+[,v
+:,v
+	let g:tagbar_autoclose = 1,V
+	let g:tagbar_width = 30,V
+g:tagbar_autoclose,v
+Tlist_Ctags_Cmd,v
+g:tagbar_ctags_bin,v
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags',V
+/Users/chris/Downloads/tagbar,v
+:%s:::g<Left><Left><Left>,v
+n,v
+nnoremap ;; :%s:::g<left><left><left>,V
+>,v
+e,v
+c,v
+a,v
+p,v
+s,v
+-,v
+C,v
+.'&cart=checkout',v
+                $link .= '&sub_frequency='.$freq.'d';,V
+                $vars['renewal_link'] = $link;,V
+legacy_,v
+foxycart_,v
+Ajaxify Diggie,v
+<script type="text/javascript">$(document).ready(function() {    $('button.foxycart_link').click(function(event) {        $('#modal').hide();    });});</script><div id="subscribe-options" class="special">  <h2>Please choose a subscription option</h2><div><h3>Conversations</h3>{exp:foxee:addtocart_custom  id="4610" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}{exp:foxee:addtocart_custom  id="4644" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Decline Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}</div><p class="note"><em>*Current subscribers please login and renew from your <a href="/profile/">Profile page</a>.</em></p>{exp:mauldin:subscriber_access sku_id="4748|4749|4751|4751" superadmin="expired"}     {if subscribed}<!--nothing displayed to current OMS subscribers-->     {if:else}               <div>               <h2 class="tout">Special Offer: Add Over My Shoulder for just $19.25 more quarterly or $149 more for 1 year!</h2>               <h3>Conversations + Over My Shoulder</h3>               {exp:foxee:addtocart_custom  id="4751" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>Quarterly $69 – Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               {exp:foxee:addtocart_custom  id="4752" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>1 Year $348 – Decline Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               </div>     {/if}{/exp:mauldin:subscriber_access}</div>,V
+        event.preventDefault();,V
+Have cart add button close original modal (C),v
+onCloseButtonClick,v
+ModalWindow,v
+<script type="text/javascript">$(document).ready(function() {    $('button.foxycart_link').click(function(event) {        event.preventDefault();        ModalWindow.onCloseButtonClick();    });});</script><div id="subscribe-options" class="special">  <h2>Please choose a subscription option</h2><div><h3>Conversations</h3>{exp:foxee:addtocart_custom  id="4610" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}{exp:foxee:addtocart_custom  id="4644" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Decline Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}</div><p class="note"><em>*Current subscribers please login and renew from your <a href="/profile/">Profile page</a>.</em></p>{exp:mauldin:subscriber_access sku_id="4748|4749|4751|4751" superadmin="expired"}     {if subscribed}<!--nothing displayed to current OMS subscribers-->     {if:else}               <div>               <h2 class="tout">Special Offer: Add Over My Shoulder for just $19.25 more quarterly or $149 more for 1 year!</h2>               <h3>Conversations + Over My Shoulder</h3>               {exp:foxee:addtocart_custom  id="4751" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>Quarterly $69 – Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               {exp:foxee:addtocart_custom  id="4752" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>1 Year $348 – Decline Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               </div>     {/if}{/exp:mauldin:subscriber_access}</div>,V
+<script type="text/javascript">$(document).ready(function() {    $('button.foxycart_link').click(function(event) {        ModalWindow.onCloseButtonClick();    });});</script><div id="subscribe-options" class="special">  <h2>Please choose a subscription option</h2><div><h3>Conversations</h3>{exp:foxee:addtocart_custom  id="4610" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}{exp:foxee:addtocart_custom  id="4644" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Decline Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}</div><p class="note"><em>*Current subscribers please login and renew from your <a href="/profile/">Profile page</a>.</em></p>{exp:mauldin:subscriber_access sku_id="4748|4749|4751|4751" superadmin="expired"}     {if subscribed}<!--nothing displayed to current OMS subscribers-->     {if:else}               <div>               <h2 class="tout">Special Offer: Add Over My Shoulder for just $19.25 more quarterly or $149 more for 1 year!</h2>               <h3>Conversations + Over My Shoulder</h3>               {exp:foxee:addtocart_custom  id="4751" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>Quarterly $69 – Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               {exp:foxee:addtocart_custom  id="4752" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>1 Year $348 – Decline Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               </div>     {/if}{/exp:mauldin:subscriber_access}</div>,V
+,V
+<div id="subscribe-options" class="special">  <h2>Please choose a subscription option</h2><div><h3>Conversations</h3>{exp:foxee:addtocart_custom  id="4610" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}{exp:foxee:addtocart_custom  id="4644" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}<p>1 Year $199 – Decline Automatic Renewal</p><p class="submit">  <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button></p>{/exp:foxee:addtocart_custom}</div><p class="note"><em>*Current subscribers please login and renew from your <a href="/profile/">Profile page</a>.</em></p>{exp:mauldin:subscriber_access sku_id="4748|4749|4751|4751" superadmin="expired"}     {if subscribed}<!--nothing displayed to current OMS subscribers-->     {if:else}               <div>               <h2 class="tout">Special Offer: Add Over My Shoulder for just $19.25 more quarterly or $149 more for 1 year!</h2>               <h3>Conversations + Over My Shoulder</h3>               {exp:foxee:addtocart_custom  id="4751" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>Quarterly $69 – Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               {exp:foxee:addtocart_custom  id="4752" block_foxybox="no" disable="related_products|custom_fields|pricing_options"}               <p>1 Year $348 – Decline Automatic Renewal</p>               <p class="submit">                 <button type="submit" name="submit" class="foxycart_link auto-renewal">Add to cart</button>               </p>               {/exp:foxee:addtocart_custom}               </div>     {/if}{/exp:mauldin:subscriber_access}</div>,V
+1.5452,v
+http://gamezone2.loc/cgm/index.php?S=08ae34a96df0adb25c483336040d5e6a9e1060d8&D=cp&C=content_publish&M=entry_form&channel_id=1&entry_id=47,v
+click,v
+http://gamezone2.loc/cgm/index.php?S=08ae34a96df0adb25c483336040d5e6a9e1060d8&D=cp&C=content_publish&M=view_entry&channel_id=1&entry_id=47,v
+        el = $('#view_content_entry_links ul.bullets li:eq(0) a');,V
+$(el[0]).click(),v
+        $(el[0]).css('background','red');,V
+        $(el[0]).click();,V
+        console.log(el[0]);,V
+h,v
+g,v
+l,v
+.,v
+),v
+$,v
+$('#submit_button'),v
+view_content_entry_links ul.bullets li:eq(0) a,v
