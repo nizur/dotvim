@@ -20,19 +20,25 @@ filetype plugin indent on
 " Disable vi compatibility
 set nocompatible
 
+" Disable modelines
+set modelines=0
+
 " Disable backup
 set nobackup
 set nowritebackup
 set noswapfile
 
+" Disable matchparen plugin
+let loaded_matchparen=1
+
 " Set up persistent undo
-set undodir=~/.vim/undo
-set undofile
-set undolevels=500 " Max number of changes that can be undone
-set undoreload=500 " Max number of lines to save on buffer reload
+"set undodir=~/.vim/undo
+"set undofile
+"set undolevels=500 " Max number of changes that can be undone
+"set undoreload=500 " Max number of lines to save on buffer reload
 
 " History - remember a lot of command line stuff
-set history=100
+"set history=100
 
 " Disable system beep
 set noerrorbells visualbell t_vb=
@@ -67,14 +73,14 @@ set shm=atI
 set backspace=start,indent,eol
 
 " Enable wildmenu
-set wildmenu
-set wildmode=list:longest
+"set wildmenu
+"set wildmode=list:longest
 
 " Do not redraw while running macros (much faster)
 set lazyredraw
 
 " Play nice with the system pasteboard
-set clipboard=unnamed,unnamedplus,autoselect
+set clipboard=unnamed
 "}}}
 
 " ===================================================
@@ -85,7 +91,7 @@ set clipboard=unnamed,unnamedplus,autoselect
 set nostartofline
 
 " Let my cursor go where I tell it to
-set virtualedit=all
+"set virtualedit=all
 "}}}
 
 " ===================================================
@@ -113,7 +119,7 @@ set wrapscan
 " ===================================================
 
 " Window width/height
-set columns=160
+set columns=180
 set lines=80
 
 " Line numbering
@@ -124,12 +130,25 @@ set numberwidth=6
 "if has("gui_macvim")
 if has("gui_running")
     " Color scheme
+    set background=dark
     " 0 = light, no color
     " 1 = light, color
     " 2 = dark, no color
     " 3 = dark, color (GUI only)
     let g:zenesque_colors=3
     colorscheme zenesque
+    "colorscheme solarized
+
+    " Invisible character colors
+    hi NonText guifg=#333333
+    hi SpecialKey guifg=#333333
+
+    " Highlight cursor based on mode
+    hi Cursor guifg=black guibg=#95e454
+    hi iCursor guifg=black guibg=red
+
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver15-iCursor
 
     " Window transparency
     "set transparency=1
@@ -149,26 +168,34 @@ if has("gui_running")
     " Remove right-side scrollbar
     set guioptions-=r
 
+    " Remove left-side scrollbar in vertical splits
+    set guioptions-=L
+
+    " Remove right-side scrollbar in vertical splits
+    set guioptions-=R
+
     " Highlight current line and column
-    "set cursorline
+    set cursorline
     "set cursorcolumn
 
     " Linespacing (default 0)
     set linespace=0
 
     " Set default font
+    " Sample: 0 O  1 l I |  " ' `  S 5   m rn
     set guifont=Droid\ Sans\ Mono\ Slashed:h12
-    "set guifont=Monaco:h12
+    "set guifont=Inconsolata-dz:h12
+    "set guifont=Consolas:h12
     "set guifont=Menlo-Regular:h12
-    set antialias
+    "set guifont=Monaco:h12
+    "set antialias
     "set noantialias
 else
     " Use 256 colors in terminal
-    "set t_Co=256
+    set t_Co=256
 
     " Color scheme
-    let xterm16_colormap='standard'
-    colorscheme xterm16
+    colorscheme wombat256
 endif
 "}}}
 
@@ -214,20 +241,23 @@ set shiftwidth=4
 set expandtab
 "set smarttab
 
+" Highlight the entire line, no matter how long it is
+set synmaxcol=0
+
 " Disable line-wrapping
 "set nowrap
 "set whichwrap+=h,l
 
 " Show something at the beginning of wrapped lines
-let &showbreak = '>>> '
+let &showbreak = '❯❯❯ '
 
 " Since I have line-wrapping enabled, make j/k more natural
 nnoremap j gj
 nnoremap k gk
 
 " Highlight matching brackets
-set showmatch
-set mat=3
+"set showmatch
+"set mat=3
 
 " Code folding
 set foldmethod=marker
@@ -241,28 +271,28 @@ set foldlevel=1
 " ===================================================
 
 " Menu behavior
-set completeopt=longest,menuone,preview
+"set completeopt=longest,menuone,preview
 
 " Tab key in insert mode is super smart!
-function! SuperCleverTab()
-    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
-        return "\<Tab>"
-    else
-        if &omnifunc != ''
-            return "\<C-X>\<C-O>"
-        elseif &dictionary != ''
-            return "\<C-K>"
-        else
-            return "\<C-N>"
-        endif
-    endif
-endfunction
-
-inoremap <Tab> <C-R>=SuperCleverTab()<cr>
-
-" Close omnicomplete preview window when I've made my selection
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"function! SuperCleverTab()
+"    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+"        return "\<Tab>"
+"    else
+"        if &omnifunc != ''
+"            return "\<C-X>\<C-O>"
+"        elseif &dictionary != ''
+"            return "\<C-K>"
+"        else
+"            return "\<C-N>"
+"        endif
+"    endif
+"endfunction
+"
+"inoremap <Tab> <C-R>=SuperCleverTab()<cr>
+"
+"" Close omnicomplete preview window when I've made my selection
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 "}}}
 
 " ===================================================
@@ -282,10 +312,10 @@ let php_folding=1
 let php_noShortTags=1
 
 " Highlight error for orphaned [ or (
-let php_parent_error_open=1
+"let php_parent_error_open=1
 
 " Highlight parent error ] or )
-let php_parent_error_close=1
+"let php_parent_error_close=1
 
 " Setting :make to work with PHP
 set makeprg=php\ -l\ %
@@ -302,6 +332,9 @@ let python_highlight_all = 1
 " Highlight whitespace at the end of the line
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+\%#\@!$/
+
+" Python-specific settings
+au BufEnter,BufRead *.py setlocal modeline cinwords=if,elif,else,for,while,try,except,finally,def,class
 "}}}
 
 " ===================================================
@@ -309,7 +342,7 @@ match WhitespaceEOL /\s\+\%#\@!$/
 " ===================================================
 
 " Sort CSS properties
-"au BufNewFile,BufRead *.css nnoremap <buffer> <leader>s ?{<cr>jV/\v^\s*\}?$<cr>k:sort<cr>:noh<cr>
+au BufNewFile,BufRead *.css nnoremap <buffer> <leader>sp ?{<cr>jV/\v^\s*\}?$<cr>k:sort<cr>:noh<cr>
 
 "}}}
 
@@ -321,7 +354,7 @@ match WhitespaceEOL /\s\+\%#\@!$/
 "set ruler
 set showmode
 set showcmd
-set ch=1
+set cmdheight=1
 set laststatus=2 " Always show statusbar
 "set statusline=CWD:\ %r%{CurDir()}%h%m
 "set statusline+=\ \ LINE:\ %l/%L:%v
@@ -331,6 +364,7 @@ set laststatus=2 " Always show statusbar
 
 hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
 hi Modified guibg=orange guifg=black ctermbg=lightred ctermfg=black
+hi StatusLineNC guibg=#222222 guifg=#444444 ctermbg=lightgrey ctermfg=black
 
 function! MyStatusLine(mode)
     let statusline=""
@@ -347,6 +381,7 @@ function! MyStatusLine(mode)
     elseif a:mode == 'Enter'
         let statusline.="%r%*"
     endif
+    "let statusline .= " CWD:\ %r%{CurDir()}%h%m"
     let statusline .= "  LINE:\ %l/%L:%v"
     let statusline .= "  TYPE: %Y"
     let statusline .= "  %#warningmsg#%{SyntasticStatuslineFlag()}%*"
@@ -362,13 +397,13 @@ set statusline=%!MyStatusLine('Enter')
 
 function! InsertStatuslineColor(mode)
   if a:mode == 'i'
-    hi StatColor guibg=orange ctermbg=lightred
+    hi StatColor guibg=red ctermbg=lightred
   elseif a:mode == 'r'
     hi StatColor guibg=#e454ba ctermbg=magenta
   elseif a:mode == 'v'
     hi StatColor guibg=#e454ba ctermbg=magenta
   else
-    hi StatColor guibg=red ctermbg=red
+    hi StatColor guibg=yellow ctermbg=yellow
   endif
 endfunction
 
@@ -376,8 +411,8 @@ au InsertEnter * call InsertStatuslineColor(v:insertmode)
 au InsertLeave * hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
 
 fun! CurDir()
-	let curdir = substitute(getcwd(), '/Users/chris/', "~/", "g")
-	return curdir
+    let curdir = substitute(getcwd(), '/Users/chris/', "~/", "g")
+    return curdir
 endfun
 "}}}
 
@@ -391,6 +426,8 @@ let g:mapleader = ","
 
 " Remap search
 map <space> /
+nnoremap / /\v
+vnoremap / /\v
 
 " Remap search/replace
 noremap ;; :%s:::g<left><left><left>
@@ -404,6 +441,9 @@ map <leader>e :e! ~/.vimrc<cr>
 
 " Fast update of docs - Disable since Pathogen does this for me
 "map <leader>ht :helptags ~/.vim/doc<cr>
+
+" Fast vertical split and focus
+nnoremap <leader>w <C-w>v<C-w>l
 
 " Escape in insert mode awesomeness
 inoremap jj <Esc>
@@ -464,11 +504,19 @@ let tlist_php_settings = 'php;c:class;d:constant;f:function' " PHP-related setti
 nnoremap <silent> <F3> :TlistToggle<cr>
 inoremap <silent> <F3> <ESC>:TlistToggle<cr>
 
-" BufExplorer
-let g:bufExplorerShowDirectories = 0 " Don't show directories
+" Tagbar
+"let g:tagbar_autofocus = 1
+"let g:tagbar_compact = 0
+"
+"nnoremap <silent> <F3> :TagbarToggle<cr>
+"inoremap <silent> <F3> <ESC>:TagbarToggle<cr>
 
-nnoremap <silent> <F4> :BufExplorerVerticalSplit<cr>
-inoremap <silent> <F4> <ESC>:BufExplorerVerticalSplit<cr>
+" LustyExplorer
+nnoremap <silent> <F4> :LustyBufferExplorer<cr>
+inoremap <silent> <F4> <ESC>:LustyBufferExplorer<cr>
+
+nnoremap <silent> <S-F4> :LustyBufferGrep<cr>
+inoremap <silent> <S-F4> <ESC>:LustyBufferGrep<cr>
 
 " YankRing
 let g:yankring_max_history = 50
@@ -494,18 +542,13 @@ inoremap <silent> <F7> <ESC>:TaskList<cr>
 nnoremap <silent> <F8> :set hls!<bar>set hls?<cr>
 inoremap <silent> <F8> <ESC>:set hls!<bar>set hls?<cr>
 
+" Command-T
+
 " Gundo
 let g:gundo_preview_height = 20
 let g:gundo_preview_bottom = 1 " Show the preview window below the main window
 
 nnoremap <silent><leader>u :GundoToggle<cr>
-
-" BufTabs
-let g:buftabs_only_basename=1
-let g:buftabs_active_highlight_group="Visual"
-let g:buftabs_separator = " "
-let g:buftabs_marker_start = "["
-let g:buftabs_marker_end = "] "
 
 " MRU - Most Recently Used
 let MRU_File = '/Users/chris/.vim/bundle/mru/mru_files'
@@ -516,6 +559,10 @@ nnoremap <silent> <leader>m :MRU<cr>
 
 " Shortcut to assign php syntax highlighting
 nnoremap <silent> <leader>p :set ft=php<cr>
+
+" Show invisibles
+nnoremap <silent> <leader>i :set list!<cr>
+set listchars=tab:▸\ ,eol:¬
 
 " Syntastic
 let g:syntastic_enable_signs = 1
@@ -532,15 +579,11 @@ endfunc
 nnoremap <silent> <leader>nm :call g:ToggleNuMode()<cr>
 
 " PeepOpen
-nnoremap <silent> <leader>t :PeepOpen<cr>
+nnoremap <silent> <leader>po :PeepOpen<cr>
 
 " Ack search... rawks!
 nnoremap <leader>a :Ack
 nnoremap <leader>af :AckFile
-
-" Indent Guides
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
 "}}}
 
 " ===================================================
@@ -567,6 +610,9 @@ au! bufwritepost .vimrc source ~/.vimrc
 
 " Update Taglist when buffer is saved
 au! bufwritepost * :TlistUpdate
+
+" Open help in a vertical window
+au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 
 " Save and restore folds on open/close
 "au! BufWinLeave * mkview
