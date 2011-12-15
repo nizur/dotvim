@@ -73,14 +73,17 @@ set shm=atI
 set backspace=start,indent,eol
 
 " Enable wildmenu
-"set wildmenu
-"set wildmode=list:longest
+set wildmenu
+set wildmode=list:longest,full
 
 " Do not redraw while running macros (much faster)
 set lazyredraw
 
 " Play nice with the system pasteboard
 set clipboard=unnamed
+
+" Where's that dictionary again?
+set dictionary=/user/share/dict/words
 "}}}
 
 " ===================================================
@@ -91,7 +94,7 @@ set clipboard=unnamed
 set nostartofline
 
 " Let my cursor go where I tell it to
-"set virtualedit=all
+set virtualedit=all
 "}}}
 
 " ===================================================
@@ -183,9 +186,10 @@ if has("gui_running")
 
     " Set default font
     " Sample: 0 O  1 l I |  " ' `  S 5   m rn
-    set guifont=Droid\ Sans\ Mono\ Slashed:h12
+    "set guifont=Droid\ Sans\ Mono\ Slashed:h12
     "set guifont=Inconsolata-dz:h12
     "set guifont=Consolas:h12
+    set guifont=Mensch-Regular:h12
     "set guifont=Menlo-Regular:h12
     "set guifont=Monaco:h12
     "set antialias
@@ -312,10 +316,10 @@ let php_folding=1
 let php_noShortTags=1
 
 " Highlight error for orphaned [ or (
-"let php_parent_error_open=1
+let php_parent_error_open=1
 
 " Highlight parent error ] or )
-"let php_parent_error_close=1
+let php_parent_error_close=1
 
 " Setting :make to work with PHP
 set makeprg=php\ -l\ %
@@ -474,6 +478,19 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" Shortcut to assign php syntax highlighting
+nnoremap <silent> <leader>p :set ft=php<cr>
+
+" Shortcut to assign javacript syntax highlighting
+nnoremap <silent> <leader>j :set ft=javascript<cr>
+
+" Show invisibles
+nnoremap <silent> <leader>i :set list!<cr>
+set listchars=tab:▸\ ,eol:¬
+
+" Column scroll-binding on <leader>sb
+noremap <silent> <leader>sb :<C-u>let @z=&so<CR>:set so=0 noscb<CR>:bo vs<CR>Ljzt:setl scb<CR><C-w>p:setl scb<CR>:let &so=@z<CR>
 "}}}
 
 " ===================================================
@@ -484,30 +501,45 @@ endfunc
 nnoremap <silent> <F2> :NERDTreeToggle ~/<cr>
 inoremap <silent> <F2> <ESC>:NERDTreeToggle ~/<cr>
 nnoremap <leader>f :execute ':NERDTreeToggle '.getcwd()<cr>
+let NERDTreeDirArrows=1
+let NERDTreeMinimalUI=1
 
 " Taglist
-let Tlist_Close_On_Select = 1 " Close the Ctags window when I select a tag
+"let Tlist_Close_On_Select = 1 " Close the Ctags window when I select a tag
 let Tlist_Compact_Format = 1 " Compact window
 let Tlist_Ctags_Cmd = '/usr/local/bin/ctags' " Ctags command location
 let Tlist_Enable_Fold_Column = 0 " Disable column folding
+let Tlist_File_Fold_Auto_Close = 1 " Close all folds except for the file I'm looking at
 let Tlist_GainFocus_On_ToggleOpen = 1 " Focus the Taglist window when opened
 let Tlist_Max_Submenu_Items = 20 " Make submenus if there are more than 10 tags
 let Tlist_Max_Tag_Length = 25 " Show the first 25 chars of the tag name
 let Tlist_Process_File_Always = 1 " Always process the file
 let Tlist_Show_Menu = 1 " Show the tags menu
-let Tlist_Show_One_File = 1 " Only show tags for the file I'm looking at
+"let Tlist_Show_One_File = 1 " Only show tags for the file I'm looking at
 let Tlist_Sort_Type = "name" " Sort by tag name
+let Tlist_Use_Right_Window = 1 " Open the window on the right
 let Tlist_WinWidth = 40 " Window width
 
-let tlist_php_settings = 'php;c:class;d:constant;f:function' " PHP-related settings
+let tlist_php_settings = 'php;c:CLASS;f:FUNCTION' " PHP-related settings
+
+hi MyTagListComment guifg=yellow ctermfg=yellow
+hi MyTagListFileName guifg=red ctermfg=red
+hi MyTagListTagName guifg=yellow ctermfg=yellow
+hi MyTagListTagScope guifg=lightgreen ctermfg=lightgreen
+hi MyTagListTitle guifg=orange ctermfg=orange
+
+set tags=tags;/
 
 nnoremap <silent> <F3> :TlistToggle<cr>
 inoremap <silent> <F3> <ESC>:TlistToggle<cr>
 
 " Tagbar
+"let g:tagbar_autoclose = 1
 "let g:tagbar_autofocus = 1
-"let g:tagbar_compact = 0
-"
+"let g:tagbar_compact = 1
+"let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+"let g:tagbar_width = 40
+
 "nnoremap <silent> <F3> :TagbarToggle<cr>
 "inoremap <silent> <F3> <ESC>:TagbarToggle<cr>
 
@@ -544,6 +576,9 @@ inoremap <silent> <F8> <ESC>:set hls!<bar>set hls?<cr>
 
 " Command-T
 
+" CtrlP
+let g:ctrlp_map = '<leader>j'
+
 " Gundo
 let g:gundo_preview_height = 20
 let g:gundo_preview_bottom = 1 " Show the preview window below the main window
@@ -555,14 +590,7 @@ let MRU_File = '/Users/chris/.vim/bundle/mru/mru_files'
 let MRU_Max_Entries = 40
 let MRU_Add_Menu = 0 " Disable the menu
 
-nnoremap <silent> <leader>m :MRU<cr>
-
-" Shortcut to assign php syntax highlighting
-nnoremap <silent> <leader>p :set ft=php<cr>
-
-" Show invisibles
-nnoremap <silent> <leader>i :set list!<cr>
-set listchars=tab:▸\ ,eol:¬
+nnoremap <leader>m :MRU<cr>
 
 " Syntastic
 let g:syntastic_enable_signs = 1
@@ -582,8 +610,20 @@ nnoremap <silent> <leader>nm :call g:ToggleNuMode()<cr>
 nnoremap <silent> <leader>po :PeepOpen<cr>
 
 " Ack search... rawks!
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack <cword><cr>
 nnoremap <leader>af :AckFile
+
+" ShowMarks colors/settings
+hi SignColumn guibg=#111111
+hi ShowMarksHLl guifg=#FF0000
+hi ShowMarksHLu guifg=#0066AA
+hi ShowMarksHLo guifg=#323232
+hi ShowMarksHLm guifg=#00FF00
+
+let g:showmarks_textlower="-"
+let g:showmarks_textupper="-"
+let g:showmarks_textother="-"
+let g:showmarks_ignore_type="hmpqr"
 "}}}
 
 " ===================================================
@@ -603,7 +643,7 @@ iab _DATE <C-R>=strftime("%A, %B %e %Y %I:%M:%S %p %Z")<CR>
 " ===================================================
 
 " Remove any trailing whitespace that is in the file
-au! BufRead,BufWrite * %s/\s\+$//ge
+"au! BufRead,BufWrite * %s/\s\+$//ge
 
 " When .vimrc is edited, reload it
 au! bufwritepost .vimrc source ~/.vimrc
@@ -613,6 +653,9 @@ au! bufwritepost * :TlistUpdate
 
 " Open help in a vertical window
 au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+
+" Add dashes to the list of "word characters" for CSS files
+au Filetype css setlocal iskeyword+=-
 
 " Save and restore folds on open/close
 "au! BufWinLeave * mkview
