@@ -122,7 +122,7 @@ set wrapscan
 " ===================================================
 
 " Window width/height
-set columns=180
+set columns=165
 set lines=80
 
 " Line numbering
@@ -130,7 +130,6 @@ set number
 set numberwidth=6
 
 " GUI-related stuff
-"if has("gui_macvim")
 if has("gui_running")
     " Color scheme
     set background=dark
@@ -146,12 +145,12 @@ if has("gui_running")
     hi NonText guifg=#333333
     hi SpecialKey guifg=#333333
 
-    " Highlight cursor based on mode
-    hi Cursor guifg=black guibg=#95e454
-    hi iCursor guifg=black guibg=red
+    " Change cursor based on mode
+    "hi Cursor guifg=black guibg=#95e454
+    "hi iCursor guifg=black guibg=red
 
-    set guicursor=n-v-c:block-Cursor
-    set guicursor+=i:ver15-iCursor
+    "set guicursor=n-v-c:block-Cursor
+    "set guicursor+=i:ver15-iCursor
 
     " Window transparency
     "set transparency=1
@@ -186,13 +185,13 @@ if has("gui_running")
 
     " Set default font
     " Sample: 0 O  1 l I |  " ' `  S 5   m rn
-    "set guifont=Droid\ Sans\ Mono\ Slashed:h12
+    set guifont=Droid\ Sans\ Mono\ Slashed:h12
     "set guifont=Inconsolata-dz:h12
     "set guifont=Consolas:h12
-    set guifont=Mensch-Regular:h12
+    "set guifont=Mensch-Regular:h12
     "set guifont=Menlo-Regular:h12
     "set guifont=Monaco:h12
-    "set antialias
+    set antialias
     "set noantialias
 else
     " Use 256 colors in terminal
@@ -342,6 +341,14 @@ au BufEnter,BufRead *.py setlocal modeline cinwords=if,elif,else,for,while,try,e
 "}}}
 
 " ===================================================
+" {{{JAVASCRIPT-RELATED
+" ===================================================
+
+let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
+
+"}}}
+
+" ===================================================
 " {{{CSS-RELATED
 " ===================================================
 
@@ -366,58 +373,58 @@ set laststatus=2 " Always show statusbar
 "set statusline+=\ %#warningmsg#%{SyntasticStatuslineFlag()}%*
 "set statusline+=%=FUNC:\ %{Tlist_Get_Tagname_By_Line()} " Use Taglist to show current function
 
-hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
-hi Modified guibg=orange guifg=black ctermbg=lightred ctermfg=black
-hi StatusLineNC guibg=#222222 guifg=#444444 ctermbg=lightgrey ctermfg=black
-
-function! MyStatusLine(mode)
-    let statusline=""
-    if a:mode == 'Enter'
-        let statusline.="%#StatColor#"
-    endif
-    let statusline.="\(%n\)\ %f\ "
-    if a:mode == 'Enter'
-        let statusline.="%*"
-    endif
-    let statusline.="%#Modified#%m"
-    if a:mode == 'Leave'
-        let statusline.="%*%r"
-    elseif a:mode == 'Enter'
-        let statusline.="%r%*"
-    endif
-    "let statusline .= " CWD:\ %r%{CurDir()}%h%m"
-    let statusline .= "  LINE:\ %l/%L:%v"
-    let statusline .= "  TYPE: %Y"
-    let statusline .= "  %#warningmsg#%{SyntasticStatuslineFlag()}%*"
-    " Use Taglist to show current function
-    let statusline .= "%=FUNC:\ %{Tlist_Get_Tagname_By_Line()}"
-    "let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %y\ [%{&encoding}:%{&fileformat}]\ \ "
-    return statusline
-endfunction
-
-au WinEnter * setlocal statusline=%!MyStatusLine('Enter')
-au WinLeave * setlocal statusline=%!MyStatusLine('Leave')
-set statusline=%!MyStatusLine('Enter')
-
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi StatColor guibg=red ctermbg=lightred
-  elseif a:mode == 'r'
-    hi StatColor guibg=#e454ba ctermbg=magenta
-  elseif a:mode == 'v'
-    hi StatColor guibg=#e454ba ctermbg=magenta
-  else
-    hi StatColor guibg=yellow ctermbg=yellow
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
-
-fun! CurDir()
-    let curdir = substitute(getcwd(), '/Users/chris/', "~/", "g")
-    return curdir
-endfun
+"hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
+"hi Modified guibg=orange guifg=black ctermbg=lightred ctermfg=black
+"hi StatusLineNC guibg=#222222 guifg=#444444 ctermbg=lightgrey ctermfg=black
+"
+"function! MyStatusLine(mode)
+"    let statusline=""
+"    if a:mode == 'Enter'
+"        let statusline.="%#StatColor#"
+"    endif
+"    let statusline.="\(%n\)\ %f\ "
+"    if a:mode == 'Enter'
+"        let statusline.="%*"
+"    endif
+"    let statusline.="%#Modified#%m"
+"    if a:mode == 'Leave'
+"        let statusline.="%*%r"
+"    elseif a:mode == 'Enter'
+"        let statusline.="%r%*"
+"    endif
+"    "let statusline .= " CWD:\ %r%{CurDir()}%h%m"
+"    let statusline .= "  LINE:\ %l/%L:%v"
+"    let statusline .= "  TYPE: %Y"
+"    let statusline .= "  %#warningmsg#%{SyntasticStatuslineFlag()}%*"
+"    " Use Taglist to show current function
+"    let statusline .= "%=FUNC:\ %{Tlist_Get_Tagname_By_Line()}"
+"    "let statusline .= "\ (%l/%L,\ %c)\ %P%=%h%w\ %y\ [%{&encoding}:%{&fileformat}]\ \ "
+"    return statusline
+"endfunction
+"
+"au WinEnter * setlocal statusline=%!MyStatusLine('Enter')
+"au WinLeave * setlocal statusline=%!MyStatusLine('Leave')
+"set statusline=%!MyStatusLine('Enter')
+"
+"function! InsertStatuslineColor(mode)
+"  if a:mode == 'i'
+"    hi StatColor guibg=red ctermbg=lightred
+"  elseif a:mode == 'r'
+"    hi StatColor guibg=#e454ba ctermbg=magenta
+"  elseif a:mode == 'v'
+"    hi StatColor guibg=#e454ba ctermbg=magenta
+"  else
+"    hi StatColor guibg=yellow ctermbg=yellow
+"  endif
+"endfunction
+"
+"au InsertEnter * call InsertStatuslineColor(v:insertmode)
+"au InsertLeave * hi StatColor guibg=#95e454 guifg=black ctermbg=lightgreen ctermfg=black
+"
+"fun! CurDir()
+"    let curdir = substitute(getcwd(), '/Users/chris/', "~/", "g")
+"    return curdir
+"endfun
 "}}}
 
 " ===================================================
@@ -526,7 +533,7 @@ hi MyTagListComment guifg=yellow ctermfg=yellow
 hi MyTagListFileName guifg=red ctermfg=red
 hi MyTagListTagName guifg=yellow ctermfg=yellow
 hi MyTagListTagScope guifg=lightgreen ctermfg=lightgreen
-hi MyTagListTitle guifg=orange ctermfg=orange
+hi MyTagListTitle guifg=orange ctermfg=lightred
 
 set tags=tags;/
 
@@ -575,9 +582,10 @@ nnoremap <silent> <F8> :set hls!<bar>set hls?<cr>
 inoremap <silent> <F8> <ESC>:set hls!<bar>set hls?<cr>
 
 " Command-T
+let g:CommandTMaxHeight = 40
 
-" CtrlP
-let g:ctrlp_map = '<leader>j'
+nnoremap <silent> <leader>t :CommandT<cr>
+inoremap <silent> <leader>t <ESC>:CommandT<cr>
 
 " Gundo
 let g:gundo_preview_height = 20
@@ -645,11 +653,15 @@ iab _DATE <C-R>=strftime("%A, %B %e %Y %I:%M:%S %p %Z")<CR>
 " Remove any trailing whitespace that is in the file
 "au! BufRead,BufWrite * %s/\s\+$//ge
 
+" When I open a new GUI window, go fullscreen & split it vertically
+"set fuopt+=maxhorz
+"au GuiEnter * set invfu | vnew
+
 " When .vimrc is edited, reload it
-au! bufwritepost .vimrc source ~/.vimrc
+au bufwritepost .vimrc source ~/.vimrc
 
 " Update Taglist when buffer is saved
-au! bufwritepost * :TlistUpdate
+au bufwritepost * :TlistUpdate
 
 " Open help in a vertical window
 au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
@@ -660,8 +672,4 @@ au Filetype css setlocal iskeyword+=-
 " Save and restore folds on open/close
 "au! BufWinLeave * mkview
 "au! BufWinEnter * silent loadview
-
-" Add EE syntax
-"au BufRead,BufNewFile *.ee set filetype=ee
-"au! Syntax ee source $VIM/ee.vim
 "}}}
