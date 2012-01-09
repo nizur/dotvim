@@ -570,9 +570,13 @@ let g:tlTokenList = ['TODO', 'HACK', 'FIXME'] " Only use these tokens
 nnoremap <silent> <F7> :TaskList<cr>
 inoremap <silent> <F7> <ESC>:TaskList<cr>
 
+" Browser refresh
+nnoremap <silent> <F8> :RRB<cr>
+inoremap <silent> <F8> <ESC>:RRB<cr>
+
 " Toggle hlsearch
-nnoremap <silent> <F8> :set hls!<bar>set hls?<cr>
-inoremap <silent> <F8> <ESC>:set hls!<bar>set hls?<cr>
+nnoremap <silent> <leader>hl :set hls!<bar>set hls?<cr>
+"inoremap <silent> <leader>hl <ESC>:set hls!<bar>set hls?<cr>
 
 " Command-T
 let g:CommandTMaxHeight = 40
