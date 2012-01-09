@@ -341,14 +341,6 @@ au BufEnter,BufRead *.py setlocal modeline cinwords=if,elif,else,for,while,try,e
 "}}}
 
 " ===================================================
-" {{{JAVASCRIPT-RELATED
-" ===================================================
-
-let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
-
-"}}}
-
-" ===================================================
 " {{{CSS-RELATED
 " ===================================================
 
@@ -528,6 +520,7 @@ let Tlist_Use_Right_Window = 1 " Open the window on the right
 let Tlist_WinWidth = 40 " Window width
 
 let tlist_php_settings = 'php;c:CLASS;f:FUNCTION' " PHP-related settings
+let g:tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function'
 
 hi MyTagListComment guifg=yellow ctermfg=yellow
 hi MyTagListFileName guifg=red ctermfg=red
@@ -562,7 +555,7 @@ let g:yankring_max_history = 50
 let g:yankring_min_element_length = 2 " Don't store single letter changes
 let g:yankring_window_use_horiz = 0  " Use vertical split
 let g:yankring_window_width = 80
-let g:yankring_history_dir = '$VIM' " Store the history file in .vim
+let g:yankring_history_file = '.vim/tmp/yankring_history'
 
 nnoremap <silent> <F5> :YRShow<cr>
 inoremap <silent> <F5> <ESC>:YRShow<cr>
@@ -594,7 +587,7 @@ let g:gundo_preview_bottom = 1 " Show the preview window below the main window
 nnoremap <silent><leader>u :GundoToggle<cr>
 
 " MRU - Most Recently Used
-let MRU_File = '/Users/chris/.vim/bundle/mru/mru_files'
+let MRU_File = '/Users/chris/.vim/tmp/mru_files'
 let MRU_Max_Entries = 40
 let MRU_Add_Menu = 0 " Disable the menu
 
@@ -615,6 +608,9 @@ endfunc
 nnoremap <silent> <leader>nm :call g:ToggleNuMode()<cr>
 
 " PeepOpen
+let g:peepopen_loaded = 1
+let g:peepopen_cwd = getcwd()
+
 nnoremap <silent> <leader>po :PeepOpen<cr>
 
 " Ack search... rawks!
